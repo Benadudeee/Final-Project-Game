@@ -1,0 +1,206 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary-clr: #191716;
+    --primary-clr-light: #2B2826;
+
+    --secondary-clr: #603A40;
+
+    --accent-clr: #EB989B;
+    --accent-clr-light: #F5CCCD;
+
+    --text-clr: #F5F5F4;
+    --text-clr-light: #131211;
+
+    --opacity-high: 0.83;
+    --opacity-med: 0.66;
+    --opacity-low: 0.33;
+
+
+    --font-size-h-xl: 3rem;
+    --font-size-h-lg: 2.5rem;
+    --font-size-h-md: 2.25rem;
+}
+
+h1{
+    font-size: var(--font-size-h-lg);
+}
+p {
+    line-height: 1.4;
+    opacity: var(--opacity-high);
+}
+
+body{
+    background-color: var(--primary-clr);
+    color: var(--text-clr);
+
+    font-size: 1.125rem;
+    max-width: 564px;
+    padding: 1.5em;
+
+    margin-inline: auto;
+}
+
+button{
+    background-color: var(--primary-clr-light);
+    color: var(--text-clr);
+    padding: .75em 1.25em;
+    border:none;
+    border-radius: 1.5em;
+
+    font-weight: 900;
+    cursor:pointer;
+}
+
+
+li{
+    list-style-type: none;
+}
+
+.heading{
+    margin-bottom:1.75em;
+
+    h1 {
+        margin-bottom: .25em;
+    }
+
+    p {
+        
+    }
+}
+
+.notif--display {
+    padding: .5em .25em;
+    background: var(--primary-clr-light);
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 100;
+}
+/* Alt classes for notif (Just changes colors) */
+.good{
+    background-color: #1a621a;
+}
+
+.bad{
+    background-color: #ab1f1f;
+}
+
+
+.game{
+    margin-bottom: 1.75em;
+
+    /* **/
+}
+
+
+.clicker{
+    padding: 1em;
+    text-align:center;
+    border-radius: 1.5em;
+    background-color: var(--primary-clr-light);
+    text-transform: uppercase;
+
+    .clicker--stats {
+        min-height: 172px;
+        margin:0;
+        font-size: 20px;
+        
+        .number {
+            font-size: 4.25rem;
+        }
+        .click--mult{
+            font-size: .825rem;
+            opacity: var(--opacity-low);
+        }
+    }
+
+    .btn{
+        width: 100%;
+        font-size: 1.125rem;
+        background-color: var(--accent-clr);
+        color: var(--text-clr-light);
+    }
+}
+.timer {
+    margin-bottom: 1.75em;
+
+        .timer--bar{
+            height: 8px;
+            width: 100%;
+            background-color: var(--text-clr);
+            border-radius: 1rem;
+            opacity: var(--opacity-low);
+
+            margin-inline: auto;
+            margin-bottom: .5em;
+
+        }
+        
+        .timer--clock{
+            p{
+                font-size: 1.25rem;
+                opacity: var(--opacity-high);
+            }
+        }
+}
+.upgrades{
+    display:flex;
+    flex-direction: column;
+    gap: 1em;
+
+    h1{
+        margin-bottom: .75em;
+    }
+
+    .upgrades--section{
+        .upgrades--section--title{
+            margin-bottom: .75em;
+        }
+    }
+
+    .powerups{
+        display:flex;
+        flex-direction: column;
+        gap: 1.25em;
+
+        .powerup--item{
+            display: inherit;
+            justify-content: space-between;
+
+            p {
+                font-size:1rem;
+                font-weight:400
+            }
+
+            .powerup--cta > button{
+                font-weight: 500;
+            }
+        }
+
+        .bought{
+            opacity: var(--opacity-low);
+
+            .powerup--info > * {
+                text-decoration: line-through;
+            }
+
+            .powerup--cta > button{
+                cursor:default;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (min-width: 796px) {
+    h1{
+        font-size: var(--font-size-h-xl);
+    }
+}
