@@ -12,7 +12,7 @@ let secondsInterval;
 
 const upgrades = {
     click_mult: [
-        {price: 0, multiplier: 2, bought: false},
+        {price: 250, multiplier: 2, bought: false},
         {price: 500, multiplier: 4, bought: false},
     ]
     
