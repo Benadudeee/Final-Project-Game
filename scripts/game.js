@@ -1,5 +1,4 @@
 /** GAME DATA  */
-import { getElemDimensions } from "./interactions.js";
 
 let COUNT = 0;
 let TIMELEFT = 600; // Time left in seconds
@@ -101,7 +100,7 @@ function setLoseScreen(){
     clearInterval(secondsInterval);
     // change innerHTML of game
     const clickerUI = document.querySelector(".clicker")
-    
+
     const timerText = clickerUI.querySelector(".timer > .timer--clock")
     const clickerTitle = clickerUI.querySelector(".clicker--stats > .number");
     const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
