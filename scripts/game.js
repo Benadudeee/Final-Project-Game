@@ -1,4 +1,5 @@
 /** GAME DATA  */
+import { getElemDimensions } from "./interactions.js";
 
 let COUNT = 0;
 let TIMELEFT = 600; // Time left in seconds
@@ -19,7 +20,7 @@ const upgrades = {
 }
 
 // Section Selectors
-const clicker = document.querySelector(".clicker");
+const clicker = document.querySelector(".btn, .game--btn");
 
 
 // Timer Functions
@@ -81,27 +82,30 @@ function setWinScreen(){
     // change innerHTML of game
     clearInterval(secondsInterval);
     // change innerHTML of game
-    const timerText = clicker.querySelector(".timer > .timer--clock")
-    const clickerTitle = clicker.querySelector(".clicker--stats > .number");
-    const clickerDesc = clicker.querySelector(".clicker--stats > p");
-    const clickerBtn = clicker.querySelector(".btn");
+    const clickerUI = document.querySelector(".clicker")
+    const timerText = clickerUI.querySelector(".timer > .timer--clock")
+    const clickerTitle = clickerUI.querySelector(".clicker--stats > .number");
+    const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
+    const clickerBtn = clickerUI.querySelector(".btn");
     
     clickerTitle.textContent = "You Win!!"
     clickerDesc.textContent = "You got the points in time! You rock!";
     clickerBtn.textContent = "Try Again";
     timerText.textContent = "XX:XX";
-
-    clickerBtn.removeEventListener("click", startGame)
+    
+    clickerBtn.removeEventListener("click", upCounter)
     clickerBtn.addEventListener("click", resetGame)
 }
 
 function setLoseScreen(){
     clearInterval(secondsInterval);
     // change innerHTML of game
-    const timerText = clicker.querySelector(".timer > .timer--clock")
-    const clickerTitle = clicker.querySelector(".clicker--stats > .number");
-    const clickerDesc = clicker.querySelector(".clicker--stats > p");
-    const clickerBtn = clicker.querySelector(".btn");
+    const clickerUI = document.querySelector(".clicker")
+    
+    const timerText = clickerUI.querySelector(".timer > .timer--clock")
+    const clickerTitle = clickerUI.querySelector(".clicker--stats > .number");
+    const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
+    const clickerBtn = clickerUI.querySelector(".btn");
     
     clickerTitle.textContent = "Game Over"
     clickerDesc.textContent = "It seems that you didn't get the point in time. You can do this!";
@@ -116,7 +120,7 @@ function resetGame(){
     TIMELEFT = TOTALTIME;
     COUNT = 0;
     game_started = false;
-
+    
     upgrades.click_mult.forEach(mult => mult.bought = false);
     
     const timerBar = document.querySelector(".timer--bar");
@@ -127,7 +131,7 @@ function resetGame(){
     timerText.textContent = returnTimerText( TIMELEFT );
     clickerDesc.textContent = "CLICKS";
     timerBar.style.width = "100%";
-
+    
     updateCounter();
 
     clickerBtn.removeEventListener("click", resetGame);
@@ -135,13 +139,13 @@ function resetGame(){
 }
 
 // Upgrade Functions (Might change later)
-function startGame(){
+function upCounter(){
     COUNT += 1 * click_multiplier;
     
     if(!game_started){
         setTimer();
         game_started = true;
-    
+        
         clickerBtn.textContent = "Click Me";
         sendNotif("Get Clickin!", "");
     }
@@ -149,9 +153,39 @@ function startGame(){
 }
 
 
+// Add indicator of count
+function indicateCount(e){
+    
+    const plus = document.createElement('div');
+    const variation = 20;
+    const xVar = (Math.random() * (-variation - variation)) + variation;
+    
+    plus.className = 'plus';
+    plus.style.top = `${window.pageYOffset + e.y}px`;
+    plus.style.left = `${e.x + xVar}px`;
+    
+    plus.innerText = `+${click_multiplier}`;
+    plus.style.animation = "fade 0.5s ease-in forwards";
+
+
+    clicker.classList.remove('bouncebtn');
+
+    // Force a reflow (browser recomputes layout)
+    // This is crucial to reset the animation state
+    void clicker.offsetWidth; // Accessing offsetWidth forces reflow
+
+    // Re-add the class to restart the animation
+    clicker.classList.add('bouncebtn');
+    
+    document.body.appendChild(plus);
+    setTimeout(() => {
+        plus.remove();
+    }, 500);
+}
+
 
 function buyMultUpgrade( i, btn ){
-
+    
     const powerupItem = btn.parentNode.parentNode; // Links to li element
     powerupItem.classList.add("bought");
 
@@ -185,7 +219,18 @@ function buyMultUpgrade( i, btn ){
 const clickerBtn = document.querySelector(".btn");
 clickerBtn.textContent = "Get Started"
 
-clickerBtn.addEventListener("click", startGame);
+window.addEventListener("click", (e) => {
+    const clickerDim = clicker.getBoundingClientRect();
+    
+    if(
+        e.x > clickerDim.x && e.x < (clickerDim.x + clickerDim.width) &&
+        e.y > clickerDim.y && e.y < (clickerDim.y + clickerDim.height)
+    ){
+        upCounter();
+        indicateCount(e);
+    }
+
+})
 
 
 const multBtns = document.querySelectorAll(".powerup--cta .double");

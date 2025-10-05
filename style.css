@@ -4,6 +4,30 @@
     box-sizing:border-box;
 }
 
+@keyframes fade {
+    0%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100%{
+        opacity: 0;
+        display:none;
+
+        transform: translateY(-60px);
+    }
+}
+
+@keyframes bounce{
+    0%{
+        transform: scale(105%)
+    }
+
+    100%{
+        transform: scale(100%);
+    }
+}
+
 :root{
     --primary-clr: #191716;
     --primary-clr-light: #2B2826;
@@ -198,6 +222,20 @@ li{
 }
 
 
+.plus{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE 10 and IE 11 */
+    user-select: none;   
+
+    position: absolute;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.bouncebtn{
+    animation: bounce 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 
 @media screen and (min-width: 796px) {
     h1{
