@@ -86,7 +86,7 @@ function setWinScreen(){
     const clickerTitle = clickerUI.querySelector(".clicker--stats > .number");
     const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
     const clickerBtn = clickerUI.querySelector(".btn");
-    
+    alert("You won the game :D")
     clickerTitle.textContent = "You Win!!"
     clickerDesc.textContent = "You got the points in time! You rock!";
     clickerBtn.textContent = "Try Again";
