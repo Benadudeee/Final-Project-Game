@@ -1,7 +1,7 @@
 /** GAME DATA  */
 
 let COUNT = 0;
-let TIMELEFT = 5; // Time left in seconds
+let TIMELEFT = 600; // Time left in seconds
 let TOTALTIME = 600; 
 
 let click_rate = 0; // Automatic clicks (0 by default)
