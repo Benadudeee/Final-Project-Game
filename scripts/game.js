@@ -1,7 +1,7 @@
 /** GAME DATA  */
 
 let COUNT = 0;
-let TIMELEFT = 600; // Time left in seconds
+let TIMELEFT = 5; // Time left in seconds
 let TOTALTIME = 600; 
 
 let click_rate = 0; // Automatic clicks (0 by default)
@@ -100,7 +100,7 @@ function setLoseScreen(){
     clearInterval(secondsInterval);
     // change innerHTML of game
     const clickerUI = document.querySelector(".clicker")
-
+    
     const timerText = clickerUI.querySelector(".timer > .timer--clock")
     const clickerTitle = clickerUI.querySelector(".clicker--stats > .number");
     const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
@@ -111,7 +111,7 @@ function setLoseScreen(){
     clickerBtn.textContent = "Try Again";
     timerText.textContent = "XX:XX";
     
-    clickerBtn.removeEventListener("click", startGame)
+    clickerBtn.removeEventListener("click", upCounter)
     clickerBtn.addEventListener("click", resetGame)
 }
 
@@ -122,10 +122,12 @@ function resetGame(){
     
     upgrades.click_mult.forEach(mult => mult.bought = false);
     
+    const clickerUI = document.querySelector(".clicker");
+
     const timerBar = document.querySelector(".timer--bar");
-    const timerText = clicker.querySelector(".timer > .timer--clock")
-    const clickerDesc = clicker.querySelector(".clicker--stats > p");
-    const clickerBtn = clicker.querySelector(".btn");
+    const timerText = clickerUI.querySelector(".timer > .timer--clock")
+    const clickerDesc = clickerUI.querySelector(".clicker--stats > p");
+    const clickerBtn = clickerUI.querySelector(".btn");
 
     timerText.textContent = returnTimerText( TIMELEFT );
     clickerDesc.textContent = "CLICKS";
@@ -134,7 +136,7 @@ function resetGame(){
     updateCounter();
 
     clickerBtn.removeEventListener("click", resetGame);
-    clickerBtn.addEventListener("click", startGame);
+    clickerBtn.addEventListener("click", upCounter);
 }
 
 // Upgrade Functions (Might change later)
