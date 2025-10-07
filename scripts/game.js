@@ -118,6 +118,7 @@ function setLoseScreen(){
 function resetGame(){
     TIMELEFT = TOTALTIME;
     COUNT = 0;
+    click_multiplier = 1;
     game_started = false;
     
     upgrades.click_mult.forEach(mult => mult.bought = false);

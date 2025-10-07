@@ -92,6 +92,17 @@ li{
         margin-bottom: .25em;
     }
 
+    .credits{
+        /* display: flex;
+        justify-content: space-between; */
+        margin-bottom: .5em;
+
+        a, p {
+            color: var(--text-clr);
+            opacity: var(--opacity-low);
+        }
+    }
+
     p {
         
     }
