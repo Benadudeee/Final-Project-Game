@@ -122,6 +122,9 @@ function resetGame(){
     game_started = false;
     
     upgrades.click_mult.forEach(mult => mult.bought = false);
+
+    const powerupItems = document.querySelectorAll('.powerup--item');
+    powerupItems.forEach(p => p.classList.remove("bought"))
     
     const clickerUI = document.querySelector(".clicker");
 
